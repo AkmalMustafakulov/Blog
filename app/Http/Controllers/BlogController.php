@@ -19,7 +19,14 @@ class BlogController extends Controller
     public function show(Blog $blog) {
         return new BlogResource($blog);
     }
-    public function update() {
-
+    public function update(Blog $blog, Request $request) {
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->save();
+        return new BlogResource($blog);
+    }
+    public function destroy(Blog $blog) {
+        $blog->delete();
+        return $blog;
     }
 }
